@@ -19,7 +19,7 @@ class LatteTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 	}
 
 	private function postProcess(string $code): string {
-		$code=\preg_replace('@\$(.*?)->(.*?)\s@', '\$$1\["$2"\]', $code);
+		$code=\preg_replace('@\$(.*?)->(.*?)\s|\|@', '\$$1\["$2"]', $code);
 		return \str_replace(['$_self', '$nonce', '$config->siteUrl'], ['$this->getName()', '$nonce??""', "\$config['siteUrl']"], $code);
 	}
 
