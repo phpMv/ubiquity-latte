@@ -36,8 +36,11 @@ class ULatteFileLoader extends \Latte\Loaders\FileLoader {
 
 	public function isExpired(string $file, int $time): bool {
 		$file = $this->getFilename($file);
-		$mtime = @filemtime($file); // @ - stat may fail
-		return !$mtime || $mtime > $time;
+		if (\file_exists($file)) {
+			$mtime = \filemtime($file);
+			return !$mtime || $mtime > $time;
+		}
+		return true;
 	}
 
 	/**
