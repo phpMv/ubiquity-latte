@@ -1,0 +1,41 @@
+{
+  "name": "phpmv/ubiquity-latte",
+  "description": "Latte template engine extension for Ubiquity framework",
+  "type": "extension",
+  "keywords": [
+    "php",
+    "framework",
+    "mvc",
+    "templates",
+    "template engine",
+    "views",
+    "php-framework",
+    "extension"
+  ],
+  "require": {
+    "php": ">=8.0",
+    "latte/latte": "^3.0",
+    "phpmv/ubiquity": "dev-204-rfc-nette-latte-templates-compatibility"
+  },
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Jean-Christophe HERON",
+      "email": "myaddressmail@gmail.com",
+      "role": "Lead developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ubiquity\\": "src/Ubiquity/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
+  "require-dev": {
+    "latte/tools": "^0.1.0"
+  }
+}
