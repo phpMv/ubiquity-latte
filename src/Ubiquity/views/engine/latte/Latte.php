@@ -31,7 +31,7 @@ class Latte extends TemplateEngine {
 
 	public function __construct($options = []) {
 		$this->engine = new Engine();
-		$cacheDir = CacheManager::getAbsoluteCacheDirectory() . \DS . 'views';
+		$cacheDir = \realpath(CacheManager::getAbsoluteCacheDirectory() . \DS . 'views');
 		$this->engine->setTempDirectory($cacheDir);
 		$this->loader = new ULatteFileLoader(\ROOT . \DS . 'views' . \DS);
 		$this->loader->addPath(Startup::getFrameworkDir() . \DS . '..' . \DS . 'core' . \DS . 'views', 'framework');
