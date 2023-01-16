@@ -15,7 +15,7 @@ class LatteTemplateGenerator extends \Ubiquity\views\engine\TemplateGenerator {
 
 
 	private function postProcess(string $code): string {
-		return \str_replace(['$_self', '$nonce', '{block _'], ['$this->getName()', '$nonce??""', '{block b_'], $code);
+		return \str_replace('$nonce', '$nonce??""', $code);
 	}
 
 	public function parseFromTwig(string $code): string {
