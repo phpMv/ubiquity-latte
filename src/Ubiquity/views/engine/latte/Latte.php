@@ -34,7 +34,7 @@ class Latte extends TemplateEngine {
 		$cacheDir = \realpath(CacheManager::getAbsoluteCacheDirectory() . \DS . 'views');
 		$this->engine->setTempDirectory($cacheDir);
 		$this->loader = new ULatteFileLoader(\ROOT . \DS . 'views' . \DS);
-		$this->loader->addPath(Startup::getFrameworkDir() . \DS . '..' . \DS . 'core' . \DS . 'views', 'framework');
+		$this->loader->addPath(Startup::getFrameworkDir() . '/../core/views/engines/latte', 'framework');
 		$this->engine->setLoader($this->loader);
 
 		if (isset ($options ['activeTheme'])) {
@@ -119,10 +119,6 @@ class Latte extends TemplateEngine {
 
 	public function getGenerator(): ?TemplateGenerator {
 		return new LatteTemplateGenerator();
-	}
-
-	public function getFrameworkTemplateFolder(): string {
-		return 'latte/';
 	}
 
 }
