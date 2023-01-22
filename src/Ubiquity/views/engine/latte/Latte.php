@@ -3,8 +3,6 @@
 namespace Ubiquity\views\engine\latte;
 
 use Latte\Engine;
-use Latte\Loader;
-use Latte\Loaders\FileLoader;
 use Ubiquity\cache\CacheManager;
 use Ubiquity\controllers\Startup;
 use Ubiquity\core\Framework;
@@ -12,6 +10,7 @@ use Ubiquity\events\EventsManager;
 use Ubiquity\events\ViewEvents;
 use Ubiquity\themes\ThemesManager;
 use Ubiquity\utils\base\UFileSystem;
+use Ubiquity\views\engine\latte\LatteTemplateGenerator;
 use Ubiquity\views\engine\TemplateEngine;
 use Ubiquity\views\engine\TemplateGenerator;
 
@@ -36,7 +35,6 @@ class Latte extends TemplateEngine {
 		$this->loader = new ULatteFileLoader(\ROOT . \DS . 'views' . \DS);
 		$this->loader->addPath(Startup::getFrameworkDir() . '/../core/views/engines/latte', 'framework');
 		$this->engine->setLoader($this->loader);
-
 		if (isset ($options ['activeTheme'])) {
 			ThemesManager::setActiveThemeFromTwig($options ['activeTheme']);
 			$this->setTheme($options ['activeTheme'], ThemesManager::THEMES_FOLDER);
@@ -53,14 +51,14 @@ class Latte extends TemplateEngine {
 	/**
 	 * @inheritDoc
 	 */
-	public function render(string $fileName, ?array $pData = [], bool $asString = false) {
+	public function render(string $viewName, ?array $pData = [], bool $asString = false) {
 		$pData ['config'] = Startup::getConfig();
-		$pData['app'] = new Framework();
+		$pData['app'] = $this->fw;
 		EventsManager::trigger(ViewEvents::BEFORE_RENDER, $viewName, $pData);
 		if ($asString === true) {
-			return $this->engine->renderToString($fileName, $pData);
+			return $this->engine->renderToString($viewName, $pData);
 		}
-		$this->engine->render($fileName, $pData);
+		$this->engine->render($viewName, $pData);
 		EventsManager::trigger(ViewEvents::AFTER_RENDER, $render, $viewName, $pData);
 	}
 
