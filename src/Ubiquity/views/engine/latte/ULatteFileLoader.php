@@ -44,6 +44,16 @@ class ULatteFileLoader extends \Latte\Loaders\FileLoader {
 	}
 
 	/**
+	 * Returns true if template exists.
+	 * @param string $file
+	 * @return bool
+	 */
+	public function exists(string $file): bool {
+		$file = $this->getFilename($file);
+		return \file_exists($file);
+	}
+
+	/**
 	 * Returns unique identifier for caching.
 	 */
 	public function getUniqueId(string $file): string {

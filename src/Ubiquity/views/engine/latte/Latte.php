@@ -115,6 +115,10 @@ class Latte extends TemplateEngine {
 		return new \Latte\Runtime\Html($str);
 	}
 
+	public function exists(string $name): bool {
+		return $this->loader->exists($name);
+	}
+
 	public function getGenerator(): ?TemplateGenerator {
 		return new LatteTemplateGenerator();
 	}
