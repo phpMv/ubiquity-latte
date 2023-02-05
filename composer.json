@@ -15,7 +15,7 @@
   "require": {
     "php": ">=8.0",
     "latte/latte": "^3.0",
-    "phpmv/ubiquity": "dev-204-rfc-nette-latte-templates-compatibility"
+    "phpmv/ubiquity": "dev-master|>=2.5.2"
   },
   "license": "Apache-2.0",
   "authors": [
